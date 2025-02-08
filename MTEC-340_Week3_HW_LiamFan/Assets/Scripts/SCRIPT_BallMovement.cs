@@ -31,16 +31,14 @@ public class SCRIPT_BallMovement : MonoBehaviour
     
     
     void Start()
-    {
-    //Setting up random direction on Start
+    { 
+        //Setting up random direction on Start
       _xDirection = Random.value > 0.5f ? 1 : -1;
       _yDirection = Random.value > 0.5f ? 1 : -1;
       
       //calculating offset of the paddle position from bottom left
       paddleOffsetX = (paddleScaleX * 0.5f);
       paddleOffsetY = (paddleScaleY * 0.5f); 
-      //Debug.Log(paddleOffsetX);
-      //Debug.Log(paddleOffsetY);
     }
 
     void Update()
@@ -52,7 +50,7 @@ public class SCRIPT_BallMovement : MonoBehaviour
             transform.position.z
         );
 
-        
+        //get paddle position
         Vector3 paddlePosition = Paddle.transform.position;
         //Debug.Log("Paddle Position - X: " + (paddlePosition.x - paddleOffsetX) + ", Y: " + (paddlePosition.y - paddleOffsetY));
 
