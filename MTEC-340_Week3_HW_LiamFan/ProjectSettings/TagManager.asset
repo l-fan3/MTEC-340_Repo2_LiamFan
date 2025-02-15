@@ -8,6 +8,7 @@ TagManager:
   - Paddle
   - BoundaryX
   - BoundaryY
+  - Brick
   layers:
   - Default
   - TransparentFX

@@ -8,10 +8,12 @@ public class SCRPT_Ball_Movement : MonoBehaviour
     public float xLimit = 9.4f;
     private int _xDirection;
     private int _yDirection;
+    private int _score;
     private AudioSource _audioSource;
-    [SerializeField] private AudioClip _wallHit;
-    [SerializeField] private AudioClip _paddleHit;
-    [SerializeField] private AudioClip _score;
+    [SerializeField] private AudioClip _SFXwallHit;
+    [SerializeField] private AudioClip _SFXpaddleHit;
+    [SerializeField] private AudioClip _SFXscore;
+    [SerializeField] private AudioClip _SFXgameOver;
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -28,9 +30,7 @@ public class SCRPT_Ball_Movement : MonoBehaviour
                 transform.position.x,
                 Mathf.Sign(transform.position.y) * yLimit,
                 transform.position.z);
-
             _yDirection *= -1;
-
             //_source.clip = _wallHit;
             //_source.Play();
         }
@@ -39,7 +39,8 @@ public class SCRPT_Ball_Movement : MonoBehaviour
         if (transform.position.y <= -yLimit)
         {
             ResetBall();
-            Debug.Log("Ball Lost!");
+            Debug.Log("Game Over!");
+            _audioSource.PlayOneShot(_SFXgameOver);
         }
             
         //x limit bounce
@@ -85,7 +86,11 @@ public class SCRPT_Ball_Movement : MonoBehaviour
         {
             _yDirection *= -1;
             Destroy(other.gameObject);
-            Debug.Log("Brick Hit!");
+            _score += 1;
+            Debug.Log("Score: " + _score);
+            _audioSource.PlayOneShot(_SFXscore);
+
+
         }
       
     }

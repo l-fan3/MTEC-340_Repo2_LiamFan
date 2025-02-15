@@ -1,9 +1,10 @@
 using UnityEngine;
+using TMPro;
 
 public class GameBehaviour : MonoBehaviour
 {
     public static GameBehaviour Instance;
-
+    //public int _score = 0;
     public float InitBallSpeed = 5.0f;
     public float BallSpeedIncrement = 1.1f;
     public 
@@ -25,8 +26,6 @@ public class GameBehaviour : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-    
-    void Start()
 
     // Update is called once per frame
     void Update()
