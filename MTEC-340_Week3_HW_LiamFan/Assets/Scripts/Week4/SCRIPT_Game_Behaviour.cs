@@ -1,13 +1,31 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
+
 public class GameBehaviour : MonoBehaviour
+
 {
     public static GameBehaviour Instance;
     //public int _score = 0;
     public float InitBallSpeed = 5.0f;
     public float BallSpeedIncrement = 1.1f;
-    public 
+    private int _score;
+
+    public int Score
+    {
+        get { return _score; }
+        set
+        {
+            _score = value;
+            UpdateScoreUI();
+        }
+    }
+    
+    [SerializeField] private TextMeshProUGUI _messages;
+    [SerializeField] private TextMeshProUGUI _scoreTextUI;
+
     void Awake()
     {
         // Singleton Pattern
@@ -27,9 +45,26 @@ public class GameBehaviour : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        Score = 0;
+        _messages.enabled = false;
+    }
+    //chat GPT>
+    private void UpdateScoreUI()
+    {
+        if (_scoreTextUI != null)
+        {
+            _scoreTextUI.text = "Score: " + _score.ToString(); // Update UI text
+        }
+        else
+        {
+            Debug.LogWarning("Score UI is not assigned in the inspector.");
+        }
+    }
+
+    public void AddScore(int amount)
+    {
+        Score += amount;
     }
 }
