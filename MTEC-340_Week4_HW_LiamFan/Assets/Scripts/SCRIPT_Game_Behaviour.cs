@@ -8,7 +8,6 @@ public class GameBehaviour : MonoBehaviour
     //public int _score = 0;
     public float InitBallSpeed = 5.0f;
     public float BallSpeedIncrement = 1.1f;
-<<<<<<< HEAD
     private int _score;
 
     //public Player[] Players = new Player[2];
@@ -25,10 +24,8 @@ public class GameBehaviour : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _messages;
     [SerializeField] private TextMeshProUGUI _scoreTextUI;
+    
 
-=======
-    public 
->>>>>>> parent of 65f1dee (Attempted to add UITextMesh (unsuccessful))
     void Awake()
     {
         // Singleton Pattern
@@ -47,8 +44,7 @@ public class GameBehaviour : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
-<<<<<<< HEAD
+    
    // private void Start()
   //  {
    //     ResetGame();
@@ -78,13 +74,11 @@ public class GameBehaviour : MonoBehaviour
   //          p.Score = 0;
  //       }
   //  }
-=======
     // Update is called once per frame
     void Update()
     {
         
     }
->>>>>>> parent of 65f1dee (Attempted to add UITextMesh (unsuccessful))
 }
 
 
