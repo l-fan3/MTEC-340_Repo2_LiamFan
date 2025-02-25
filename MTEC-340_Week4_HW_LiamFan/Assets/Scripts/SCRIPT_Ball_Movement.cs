@@ -69,6 +69,7 @@ public class SCRIPT_Ball_Movement : MonoBehaviour
         //choosing the random direction again
         _yDirection = Random.value > 0.5 ? 1 : -1;
         _xDirection = Random.value > 0.5 ? 1 : -1;
+        GameBehaviour.Instance.Score = 0;
 
     }
 
@@ -100,6 +101,7 @@ public class SCRIPT_Ball_Movement : MonoBehaviour
 
             Destroy(other.gameObject);
             _score += 1;
+            GameBehaviour.Instance.Score += 1;
             Debug.Log("Score: " + _score);
             _audioSource.PlayOneShot(_SFXscore);
 

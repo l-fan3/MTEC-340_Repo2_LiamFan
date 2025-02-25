@@ -1,31 +1,31 @@
 using UnityEngine;
 using TMPro;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 public class GameBehaviour : MonoBehaviour
 {
     public static GameBehaviour Instance;
 
-    //public int _score = 0;
-    public float InitBallSpeed = 5.0f;
-    public float BallSpeedIncrement = 1.1f;
-    private int _score;
+    //scoring get set
+    private int _score = 0;
+    public int Score
+    {
+        get { return _score; }
+        set
+        {
+            _score = value;
+            UpdateScoreUI();
+        }
+    }
 
-    //public Player[] Players = new Player[2];
-
-    //public int Score
-    //{
-    //    get { return _score; }
-   //     set
-   //     {
-   //         _score = value;
-   //         UpdateScoreUI();
-   //     }
-   // }
-
+    //Scoring UI elements
     [SerializeField] private TextMeshProUGUI _messages;
     [SerializeField] private TextMeshProUGUI _scoreTextUI;
-    
-
+    //pause 
+    public Utilities.GameplayState State = Utilities.GameplayState.Play;
+    public KeyCode pause;
     void Awake()
     {
         // Singleton Pattern
@@ -43,6 +43,8 @@ public class GameBehaviour : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        _messages.enabled = false;
     }
     
    // private void Start()
@@ -50,34 +52,45 @@ public class GameBehaviour : MonoBehaviour
    //     ResetGame();
   //  }
 
-   // public void ScorePoint(int playerNumber)
-  //  {
-   //     Players[playerNumber - 1].Score += 1;
-   //     CheckWinner();
-  //  }
+  private void UpdateScoreUI()
+  {
+      if (_scoreTextUI != null)
+      {
+          _scoreTextUI.text = "Score: " + _score.ToString();
+      }
+  }
 
-  //  private void CheckWinner()
-  //  {
-  //      foreach (Player p in Players)
-  //      {
-  //          if (p.Score >= _victoryScore)
-  //          {
-  //              ResetGame();
-  //          }
-  //      }
-  //  }
+  public static class Utilities
+  {
+      public enum GameplayState
+      {
+          Play,
+          Pause
+      }
+  }
+  private void SwitchState()
+  {
+      if (State == Utilities.GameplayState.Play)
+      {
+          State = Utilities.GameplayState.Pause;
+          Time.timeScale = 0; // Freezes the game
+          _messages.text = "Paused";
+          _messages.enabled = true;
+      }
+      else
+      {
+          State = Utilities.GameplayState.Play;
+          Time.timeScale = 1; // Resumes the game
+          _messages.enabled = false;
+      }
+  }
 
- //   private void ResetGame();
- //   {
- //       foreach (Player p in Players)
- //       {
-  //          p.Score = 0;
- //       }
-  //  }
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(pause))
+        {
+            SwitchState();
+        }
     }
 }
 
