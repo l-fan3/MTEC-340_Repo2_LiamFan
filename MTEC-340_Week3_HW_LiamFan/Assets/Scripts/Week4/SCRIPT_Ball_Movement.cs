@@ -38,6 +38,7 @@ public class SCRPT_Ball_Movement : MonoBehaviour
         //y negative limit reset
         if (transform.position.y <= -yLimit)
         {
+         //   GameBehaviour.Instance.ScorePoint(transform.position.x >  0 ? 1 : 2);
             ResetBall();
             Debug.Log("Game Over!");
             _audioSource.PlayOneShot(_SFXgameOver);
